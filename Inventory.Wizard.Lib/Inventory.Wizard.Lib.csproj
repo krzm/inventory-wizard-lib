@@ -7,20 +7,20 @@
   </PropertyGroup>
 
    <ItemGroup>
-    <Reference Include="CLIWizardHelper">
-      <HintPath>..\..\build\Build\cli-wizard-helper\CLIWizardHelper\CLIWizardHelper.dll</HintPath>
+   <Reference Include="EFCoreHelper">
+      <HintPath>..\..\..\Build\efcore-helper\EFCoreHelper\EFCoreHelper.dll</HintPath>
     </Reference>
     <Reference Include="CLIHelper">
-      <HintPath>..\..\build\Build\cli-helper\CLIHelper\CLIHelper.dll</HintPath>
+      <HintPath>..\..\..\Build\cli-helper\CLIHelper\CLIHelper.dll</HintPath>
     </Reference>
     <Reference Include="CLIReader">
-      <HintPath>..\..\build\Build\cli-reader\CLIReader\CLIReader.dll</HintPath>
+      <HintPath>..\..\..\Build\cli-reader\CLIReader\CLIReader.dll</HintPath>
     </Reference>
-    <Reference Include="EFCoreHelper">
-      <HintPath>..\..\build\Build\efcore-helper\EFCoreHelper\EFCoreHelper.dll</HintPath>
+    <Reference Include="CLIWizardHelper">
+      <HintPath>..\..\..\Build\cli-wizard-helper\CLIWizardHelper\CLIWizardHelper.dll</HintPath>
     </Reference>
     <Reference Include="Inventory.Data">
-      <HintPath>..\..\build\Build\inventory-data\Inventory.Data\Inventory.Data.dll</HintPath>
+      <HintPath>..\..\..\Build\inventory-data\Inventory.Data\Inventory.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
