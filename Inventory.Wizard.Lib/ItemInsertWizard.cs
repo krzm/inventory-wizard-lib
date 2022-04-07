@@ -1,7 +1,7 @@
-﻿using CLIHelper;
-using CLIReader;
+﻿using CLIReader;
 using CLIWizardHelper;
 using Inventory.Data;
+using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
@@ -11,17 +11,19 @@ public class ItemInsertWizard
 	public ItemInsertWizard(
 		IInventoryUnitOfWork unitOfWork
 		, IReader<string> requiredTextReader
-		, IOutput output) 
-			: base(unitOfWork, requiredTextReader, output)
+		, ILogger log) 
+			: base(unitOfWork, requiredTextReader, log)
 	{
 	}
 
 	protected override Item GetEntity()
 	{
+		var input = RequiredTextReader.Read(
+			new ReadConfig(6, nameof(Item.ItemCategoryId)));
+		ArgumentNullException.ThrowIfNull(input);
 		return new Item
 		{
-			ItemCategoryId = int.Parse(RequiredTextReader.Read(
-				new ReadConfig(6, nameof(Item.ItemCategoryId))))
+			ItemCategoryId = int.Parse(input)
 			,
 			Name = RequiredTextReader.Read(
 				new ReadConfig(25, nameof(Item.Name)))

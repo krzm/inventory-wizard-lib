@@ -1,7 +1,7 @@
-﻿using CLIHelper;
-using CLIReader;
+﻿using CLIReader;
 using CLIWizardHelper;
 using Inventory.Data;
+using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
@@ -11,8 +11,8 @@ public class ItemImageUpdateWizard
     public ItemImageUpdateWizard(
 		IInventoryUnitOfWork unitOfWork
 		, IReader<string> requiredTextReader
-		, IOutput output) 
-			: base(unitOfWork, requiredTextReader, output)
+		, ILogger log) 
+			: base(unitOfWork, requiredTextReader, log)
     {
     }
 
@@ -26,8 +26,10 @@ public class ItemImageUpdateWizard
         switch (nr)
         {
 			case 1:
-				model.ItemId = int.Parse(RequiredTextReader.Read(
-					new ReadConfig(6, nameof(ItemImage.ItemId))));
+				var input = RequiredTextReader.Read(
+					new ReadConfig(6, nameof(ItemImage.ItemId)));
+				ArgumentNullException.ThrowIfNull(input);
+				model.ItemId = int.Parse(input);
 				break;
 			case 2:
 				model.Path = RequiredTextReader.Read(

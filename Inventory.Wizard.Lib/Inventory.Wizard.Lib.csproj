@@ -6,8 +6,32 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-   <ItemGroup>
-   <Reference Include="EFCoreHelper">
+  <ItemGroup>
+		<PackageReference Include="Serilog" Version="2.10.0" />
+	</ItemGroup>
+  
+  <!--Debug refs-->
+	<ItemGroup>
+    <Reference Include="EFCoreHelper">
+			<HintPath>..\..\efcore-helper\EFCoreHelper\bin\Debug\net6.0\EFCoreHelper.dll</HintPath>
+		</Reference>
+     <Reference Include="CLIHelper">
+      <HintPath>..\..\cli-helper\CLIHelper\bin\Debug\net6.0\CLIHelper.dll</HintPath>
+    </Reference>
+		<Reference Include="CLIReader">	
+			<HintPath>..\..\cli-reader\CLIReader\bin\Debug\net6.0\CLIReader.dll</HintPath>
+		</Reference>
+    <Reference Include="CLIWizardHelper">
+			<HintPath>..\..\cli-wizard-helper\CLIWizardHelper\bin\Debug\net6.0\CLIWizardHelper.dll</HintPath>
+		</Reference>
+    <Reference Include="Inventory.Data">
+			<HintPath>..\..\inventory-data\Inventory.Data\bin\Debug\net6.0\Inventory.Data.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<!--Release refs-->
+  <!-- <ItemGroup>
+    <Reference Include="EFCoreHelper">
       <HintPath>..\..\..\Build\efcore-helper\EFCoreHelper\EFCoreHelper.dll</HintPath>
     </Reference>
     <Reference Include="CLIHelper">
@@ -22,5 +46,5 @@
     <Reference Include="Inventory.Data">
       <HintPath>..\..\..\Build\inventory-data\Inventory.Data\Inventory.Data.dll</HintPath>
     </Reference>
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>

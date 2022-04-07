@@ -1,7 +1,7 @@
-using CLIHelper;
 using CLIReader;
 using CLIWizardHelper;
 using Inventory.Data;
+using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
@@ -14,8 +14,8 @@ public class ItemCategoryInsertWizard
     IInventoryUnitOfWork unitOfWork
     , IReader<string> requiredTextReader
     , IReader<string> optionalTextReader
-    , IOutput output)
-        : base(unitOfWork, requiredTextReader, output)
+    , ILogger log)
+        : base(unitOfWork, requiredTextReader, log)
     {
         this.optionalTextReader = optionalTextReader;
     }
@@ -36,10 +36,18 @@ public class ItemCategoryInsertWizard
 
     private int? GetId()
     {
-        var input = optionalTextReader.Read(
-            new ReadConfig(6, nameof(ItemCategory.ParentId)));
-        var result = string.IsNullOrWhiteSpace(input) == false;
-        return result ? int.Parse(input) : null;
+        try
+        {
+            var input = optionalTextReader.Read(
+                new ReadConfig(6, nameof(ItemCategory.ParentId)));
+            ArgumentNullException.ThrowIfNull(input);
+            return int.Parse(input);
+        }
+        catch (ArgumentNullException ex)
+        {
+            Log.Error(ex, nameof(GetId));
+            return null;
+        }
     }
 
     protected override void InsertEntity(ItemCategory entity) => 

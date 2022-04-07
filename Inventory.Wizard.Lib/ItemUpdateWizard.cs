@@ -1,7 +1,7 @@
-﻿using CLIHelper;
-using CLIReader;
+﻿using CLIReader;
 using CLIWizardHelper;
 using Inventory.Data;
+using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
@@ -11,8 +11,8 @@ public class ItemUpdateWizard
     public ItemUpdateWizard(
 		IInventoryUnitOfWork unitOfWork
 		, IReader<string> requiredTextReader
-		, IOutput output) 
-			: base(unitOfWork, requiredTextReader, output)
+		, ILogger log) 
+			: base(unitOfWork, requiredTextReader, log)
     {
     }
 
@@ -30,8 +30,10 @@ public class ItemUpdateWizard
 					new ReadConfig(25, nameof(Item.Name)));
 				break;
 			case 2:
-				model.ItemCategoryId = int.Parse(RequiredTextReader.Read(
-					new ReadConfig(6, nameof(Item.ItemCategoryId))));
+				var input = RequiredTextReader.Read(
+					new ReadConfig(6, nameof(Item.ItemCategoryId)));
+				ArgumentNullException.ThrowIfNull(input);
+				model.ItemCategoryId = int.Parse(input);
 				break;
 		}
 	}

@@ -1,7 +1,7 @@
-﻿using CLIHelper;
-using CLIReader;
+﻿using CLIReader;
 using CLIWizardHelper;
 using Inventory.Data;
+using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
@@ -14,8 +14,8 @@ public class ItemCategoryUpdateWizard
 		IInventoryUnitOfWork unitOfWork
 		, IReader<string> requiredTextReader
 		, IReader<string> optionalTextReader
-		, IOutput output) 
-			: base(unitOfWork, requiredTextReader, output)
+		, ILogger log) 
+			: base(unitOfWork, requiredTextReader, log)
     {
         this.optionalTextReader = optionalTextReader;
     }
@@ -38,8 +38,16 @@ public class ItemCategoryUpdateWizard
 					new ReadConfig(70, nameof(ItemCategory.Description)));
 				break;
 			case 3:
-				model.ParentId = int.Parse(optionalTextReader.Read(
-					new ReadConfig(6, nameof(ItemCategory.ParentId))));
+				try
+				{
+					var parentId = optionalTextReader.Read(
+					new ReadConfig(6, nameof(ItemCategory.ParentId)));
+					ArgumentNullException.ThrowIfNull(parentId);
+					model.ParentId = int.Parse(parentId);
+				}
+				catch (ArgumentNullException)
+				{
+				}
 				break;
 		}
 	}
