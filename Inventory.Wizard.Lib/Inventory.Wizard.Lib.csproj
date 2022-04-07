@@ -11,7 +11,7 @@
 	</ItemGroup>
   
   <!--Debug refs-->
-	<ItemGroup>
+	<!-- <ItemGroup>
     <Reference Include="EFCoreHelper">
 			<HintPath>..\..\efcore-helper\EFCoreHelper\bin\Debug\net6.0\EFCoreHelper.dll</HintPath>
 		</Reference>
@@ -27,10 +27,10 @@
     <Reference Include="Inventory.Data">
 			<HintPath>..\..\inventory-data\Inventory.Data\bin\Debug\net6.0\Inventory.Data.dll</HintPath>
 		</Reference>
-	</ItemGroup>
+	</ItemGroup> -->
 
 	<!--Release refs-->
-  <!-- <ItemGroup>
+  <ItemGroup>
     <Reference Include="EFCoreHelper">
       <HintPath>..\..\..\Build\efcore-helper\EFCoreHelper\EFCoreHelper.dll</HintPath>
     </Reference>
@@ -46,5 +46,5 @@
     <Reference Include="Inventory.Data">
       <HintPath>..\..\..\Build\inventory-data\Inventory.Data\Inventory.Data.dll</HintPath>
     </Reference>
-  </ItemGroup> -->
+  </ItemGroup>
 </Project>
