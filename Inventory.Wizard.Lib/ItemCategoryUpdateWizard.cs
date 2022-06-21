@@ -6,7 +6,7 @@ using Serilog;
 namespace Inventory.Wizard.Lib;
 
 public class ItemCategoryUpdateWizard 
-	: UpdateWizard<IInventoryUnitOfWork, ItemCategory>
+	: UpdateWizard<IInventoryUnitOfWork, Category>
 {
     private readonly IReader<string> optionalTextReader;
 
@@ -20,28 +20,28 @@ public class ItemCategoryUpdateWizard
         this.optionalTextReader = optionalTextReader;
     }
 
-    protected override ItemCategory GetById(int id)
+    protected override Category GetById(int id)
     {
-        return UnitOfWork.ItemCategory.GetByID(id);
+        return UnitOfWork.Category.GetByID(id);
 	}
 
-    protected override void UpdateEntity(int nr, ItemCategory model)
+    protected override void UpdateEntity(int nr, Category model)
     {
         switch (nr)
         {
 			case 1:
 				model.Name = RequiredTextReader.Read(
-					new ReadConfig(25, nameof(ItemCategory.Name)));
+					new ReadConfig(25, nameof(Category.Name)));
 				break;
 			case 2:
 				model.Description = optionalTextReader.Read(
-					new ReadConfig(70, nameof(ItemCategory.Description)));
+					new ReadConfig(70, nameof(Category.Description)));
 				break;
 			case 3:
 				try
 				{
 					var parentId = optionalTextReader.Read(
-					new ReadConfig(6, nameof(ItemCategory.ParentId)));
+					new ReadConfig(6, nameof(Category.ParentId)));
 					ArgumentNullException.ThrowIfNull(parentId);
 					model.ParentId = int.Parse(parentId);
 				}

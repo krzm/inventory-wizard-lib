@@ -19,11 +19,11 @@ public class ItemInsertWizard
 	protected override Item GetEntity()
 	{
 		var input = RequiredTextReader.Read(
-			new ReadConfig(6, nameof(Item.ItemCategoryId)));
+			new ReadConfig(6, nameof(Item.CategoryId)));
 		ArgumentNullException.ThrowIfNull(input);
 		return new Item
 		{
-			ItemCategoryId = int.Parse(input)
+			CategoryId = int.Parse(input)
 			,
 			Name = RequiredTextReader.Read(
 				new ReadConfig(25, nameof(Item.Name)))

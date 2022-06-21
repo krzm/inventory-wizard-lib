@@ -6,7 +6,7 @@ using Serilog;
 namespace Inventory.Wizard.Lib;
 
 public class ItemImageInsertWizard 
-	: InsertWizard<IInventoryUnitOfWork, ItemImage>
+	: InsertWizard<IInventoryUnitOfWork, Image>
 {
 	public ItemImageInsertWizard(
 	   IInventoryUnitOfWork unitOfWork
@@ -16,18 +16,18 @@ public class ItemImageInsertWizard
 	{
 	}
 
-	protected override ItemImage GetEntity()
+	protected override Image GetEntity()
 	{
-		var input = RequiredTextReader.Read(new ReadConfig(6, nameof(ItemImage.ItemId)));
+		var input = RequiredTextReader.Read(new ReadConfig(6, nameof(Image.ItemId)));
 		ArgumentNullException.ThrowIfNull(input);
-		return new ItemImage()
+		return new Image()
 		{
 			ItemId = int.Parse(input)
 			,
-			Path = RequiredTextReader.Read(new ReadConfig(250, nameof(ItemImage.Path)))
+			Path = RequiredTextReader.Read(new ReadConfig(250, nameof(Image.Path)))
 		};
 	}
 
-	protected override void InsertEntity(ItemImage entity) =>
-		UnitOfWork.ItemImage.Insert(entity);
+	protected override void InsertEntity(Image entity) =>
+		UnitOfWork.Image.Insert(entity);
 }

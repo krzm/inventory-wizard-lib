@@ -6,7 +6,7 @@ using Serilog;
 namespace Inventory.Wizard.Lib;
 
 public class ItemCategoryInsertWizard 
-    : InsertWizard<IInventoryUnitOfWork, ItemCategory>
+    : InsertWizard<IInventoryUnitOfWork, Category>
 {
     private readonly IReader<string> optionalTextReader;
 
@@ -20,15 +20,15 @@ public class ItemCategoryInsertWizard
         this.optionalTextReader = optionalTextReader;
     }
 
-    protected override ItemCategory GetEntity()
+    protected override Category GetEntity()
     {
-        return new ItemCategory
+        return new Category
         {
             Name = RequiredTextReader.Read(
-                new ReadConfig(25, nameof(ItemCategory.Name)))
+                new ReadConfig(25, nameof(Category.Name)))
             ,
             Description = optionalTextReader.Read(
-                new ReadConfig(70, nameof(ItemCategory.Description)))
+                new ReadConfig(70, nameof(Category.Description)))
             ,
             ParentId = GetId()
         };
@@ -39,7 +39,7 @@ public class ItemCategoryInsertWizard
         try
         {
             var input = optionalTextReader.Read(
-                new ReadConfig(6, nameof(ItemCategory.ParentId)));
+                new ReadConfig(6, nameof(Category.ParentId)));
             ArgumentNullException.ThrowIfNull(input);
             return int.Parse(input);
         }
@@ -50,6 +50,6 @@ public class ItemCategoryInsertWizard
         }
     }
 
-    protected override void InsertEntity(ItemCategory entity) => 
-        UnitOfWork.ItemCategory.Insert(entity);
+    protected override void InsertEntity(Category entity) => 
+        UnitOfWork.Category.Insert(entity);
 }

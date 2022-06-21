@@ -31,9 +31,9 @@ public class ItemUpdateWizard
 				break;
 			case 2:
 				var input = RequiredTextReader.Read(
-					new ReadConfig(6, nameof(Item.ItemCategoryId)));
+					new ReadConfig(6, nameof(Item.CategoryId)));
 				ArgumentNullException.ThrowIfNull(input);
-				model.ItemCategoryId = int.Parse(input);
+				model.CategoryId = int.Parse(input);
 				break;
 		}
 	}

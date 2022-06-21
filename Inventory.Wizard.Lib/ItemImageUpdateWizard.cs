@@ -6,7 +6,7 @@ using Serilog;
 namespace Inventory.Wizard.Lib;
 
 public class ItemImageUpdateWizard 
-	: UpdateWizard<IInventoryUnitOfWork, ItemImage>
+	: UpdateWizard<IInventoryUnitOfWork, Image>
 {
     public ItemImageUpdateWizard(
 		IInventoryUnitOfWork unitOfWork
@@ -16,24 +16,24 @@ public class ItemImageUpdateWizard
     {
     }
 
-    protected override ItemImage GetById(int id)
+    protected override Image GetById(int id)
     {
-        return UnitOfWork.ItemImage.GetByID(id);
+        return UnitOfWork.Image.GetByID(id);
 	}
 
-    protected override void UpdateEntity(int nr, ItemImage model)
+    protected override void UpdateEntity(int nr, Image model)
     {
         switch (nr)
         {
 			case 1:
 				var input = RequiredTextReader.Read(
-					new ReadConfig(6, nameof(ItemImage.ItemId)));
+					new ReadConfig(6, nameof(Image.ItemId)));
 				ArgumentNullException.ThrowIfNull(input);
 				model.ItemId = int.Parse(input);
 				break;
 			case 2:
 				model.Path = RequiredTextReader.Read(
-					new ReadConfig(250, nameof(ItemImage.Path)));
+					new ReadConfig(250, nameof(Image.Path)));
 				break;
 		}
 	}
