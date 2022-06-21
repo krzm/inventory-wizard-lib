@@ -5,12 +5,12 @@ using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
-public class ItemCategoryInsertWizard 
+public class CategoryInsertWizard 
     : InsertWizard<IInventoryUnitOfWork, Category>
 {
     private readonly IReader<string> optionalTextReader;
 
-    public ItemCategoryInsertWizard(
+    public CategoryInsertWizard(
     IInventoryUnitOfWork unitOfWork
     , IReader<string> requiredTextReader
     , IReader<string> optionalTextReader

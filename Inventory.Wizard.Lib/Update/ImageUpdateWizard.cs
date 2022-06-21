@@ -5,10 +5,10 @@ using Serilog;
 
 namespace Inventory.Wizard.Lib;
 
-public class ItemImageUpdateWizard 
+public class ImageUpdateWizard 
 	: UpdateWizard<IInventoryUnitOfWork, Image>
 {
-    public ItemImageUpdateWizard(
+    public ImageUpdateWizard(
 		IInventoryUnitOfWork unitOfWork
 		, IReader<string> requiredTextReader
 		, ILogger log) 
